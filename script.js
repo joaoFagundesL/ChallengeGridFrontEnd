@@ -4,35 +4,30 @@ let body = document.querySelector('body');
 
 let links = document.querySelectorAll('.menu__link');
 
+let openIcon = "/assets/images/icon-menu.svg";
+let closeIcon = "/assets/images/icon-menu-close.svg"
 
 openMenuIcon.addEventListener('click', () => {
+
     menu.classList.toggle('opened');
 
     body.classList.toggle('body-open');
 
-    if(!menu.classList.contains('opened')) {
+    body.classList.toggle('fixed');
 
-        links.forEach( (li) => {
-            li.classList.remove('white-link');
-        });
-        
-        body.classList.remove('fixed');
-        
-        setTimeout(() => {
-            document.querySelector('.menu-mobile').src = "/assets/images/icon-menu.svg";
-        }, 300);
-        
-    } else {
-        
-        links.forEach( (li) => {
-            li.classList.add('white-link');
-        });
+    links.forEach( (li) => {
+        li.classList.toggle('white-link');
+    });
 
-        body.classList.add('fixed');
-
-        setTimeout(() => {
-            document.querySelector('.menu-mobile').src = "/assets/images/icon-menu-close.svg";
-        }, 300);
-    }
-
+    if(!menu.classList.contains('opened')) 
+        changeIcon(openIcon);
+    else 
+        changeIcon(closeIcon);
+    
 });
+
+function changeIcon(icon) {
+    setTimeout(() => {
+        document.querySelector('.menu-mobile').src = icon;
+    }, 300);
+}
